@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameUI : MonoBehaviour
 {
 
@@ -11,11 +12,15 @@ public class GameUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
 
     public float currentTime;
+    
     private TimeSpan timePlaying;
+   
 
     private void Start()
     {
         openPauseMenu.Enable();
+       
+
     }
     private void Update()
     {
@@ -41,12 +46,15 @@ public class GameUI : MonoBehaviour
     public void Restart()
     {
         GameManager.Instance.StartGame();
-        GameManager.Instance.PauseGame();
+        //GameManager.Instance.PauseGame();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     public void ExitToMain()
     {
         GameManager.Instance.MainMenu();
         GameManager.Instance.PauseGame();
+        
     }
 }

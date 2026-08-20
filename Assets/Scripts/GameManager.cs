@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    
     private void Awake()
     {
         if (Instance != null)
@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(1, LoadSceneMode.Single) ;
     }
 
     public void MainMenu()

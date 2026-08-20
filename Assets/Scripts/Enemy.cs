@@ -26,4 +26,17 @@ public class Enemy : MonoBehaviour
         enemyrb.AddForce(lookDirecion*enemySpeed);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player Projectile"))
+        {
+            enemyHealth -= other.GetComponent<MoveProjectile>().damage;
+            Destroy(other.gameObject);
+            if (enemyHealth < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
 }

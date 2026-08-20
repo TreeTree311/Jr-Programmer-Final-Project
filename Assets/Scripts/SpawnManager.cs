@@ -9,27 +9,41 @@ public class SpawnManager : MonoBehaviour
     float spawnDistanceX = 16f;
     float spawnDistanceZ = 11f;
     float spawnPointY = 0.5f;
-    int initialEnemies = 3;
+    public int initialEnemies;
     int increaseEenemyCount = 2;
     float timeBetweenWaves = 10f;
     float timeToAddBetweenWaves = 10f;
+    float startTime;
+    float elapsedTime;
+
 
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        initialEnemies = 3;
+       
+    }
     void Start()
     {
+        
         player = GameObject.Find("Player");
         SpawnEnemyWave(initialEnemies);
+        
+        startTime = Time.time;
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= timeBetweenWaves)
+        elapsedTime = Time.time - startTime;
+        if (elapsedTime >= timeBetweenWaves)
         {
             initialEnemies += increaseEenemyCount;
             timeBetweenWaves += timeToAddBetweenWaves;
             SpawnEnemyWave(initialEnemies);
+           
         }
     }
     Vector3 GenerateSpawnPosition()

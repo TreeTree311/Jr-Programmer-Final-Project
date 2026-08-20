@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5943178517893349612, guid: 947368628fdfeb74c89de04f1fce543a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -956,6 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   playerSpeed: 100
+  projectile: {fileID: 756504749444317737, guid: 37997e46afb55dc4189220f312f5e7f3, type: 3}
   moveAction:
     m_Name: Move
     m_Type: 0
@@ -1086,6 +1091,7 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
     m_Priority: 0
+  lookDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1071648865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2420,7 +2426,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 981ea7d8048c1d540aa5b70ef75e44aa, type: 2}
+  - {fileID: 2100000, guid: f12c0657aee19a04596994cbce0d8482, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2739,6 +2745,7 @@ MonoBehaviour:
   - {fileID: 4698182234691147417, guid: 755c16b28c512cf4a9857e1c341f70cc, type: 3}
   - {fileID: 16151267836194625, guid: 2b8df60cac816354cbad52d7357f24f0, type: 3}
   - {fileID: 8050785796756620414, guid: 56e6f2a715879e84b851e3ab203f6a97, type: 3}
+  initialEnemies: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
