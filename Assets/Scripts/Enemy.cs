@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] float enemySpeed;
     [SerializeField] float enemyHealth;
+    public float damageOntouch;
 
     Rigidbody enemyrb;
     GameObject player;

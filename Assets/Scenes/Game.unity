@@ -961,6 +961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   playerSpeed: 100
   projectile: {fileID: 756504749444317737, guid: 37997e46afb55dc4189220f312f5e7f3, type: 3}
+  playerHealth: 50
   moveAction:
     m_Name: Move
     m_Type: 0

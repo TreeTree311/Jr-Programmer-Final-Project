@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed;
     [SerializeField] GameObject projectile;
+
+    [SerializeField] float playerHealth = 50;
 
 
     [SerializeField] InputAction moveAction;
@@ -16,8 +20,10 @@ public class PlayerController : MonoBehaviour
     Vector2 moveValue;
     Vector2 lookValue;
     public Vector3 lookDirection;
-    float projectileSpeed = 500f;
+    float projectileSpeed = 10f;
     float fireRate = 1f;
+    int bulletCount = 1;
+    float bulletLifeSpan = 0.8f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,10 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        //if (inputActions.Player.Attack.triggered)
-        //{
-        //    fireProjectile();
-        //}
+        
     }
     void MovePlayer()
     { 
@@ -53,8 +56,20 @@ public class PlayerController : MonoBehaviour
     }
     void fireProjectile()
     {
-        Instantiate(projectile,transform.position, projectile.transform.rotation);
-        projectile.GetComponent<Rigidbody>().AddForce(Vector3.up * projectileSpeed);
+        int incrementRotationBy = 360 / bulletCount;
+        int rotation = 0;
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            
+
+            GameObject bullet = Instantiate(projectile, transform.position, Quaternion.Euler(0, rotation, 0));
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            bulletRb.AddForce(bulletRb.transform.forward * projectileSpeed, ForceMode.Impulse);
+
+            rotation += incrementRotationBy;
+            Destroy(bullet, bulletLifeSpan);
+        }
 
     }
 
@@ -64,6 +79,18 @@ public class PlayerController : MonoBehaviour
         { 
             fireProjectile();
             yield return new WaitForSeconds(fireRate);
+        }
+    }
+    void OnCollisionEnter (Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            playerHealth -= collision.gameObject.GetComponent<Enemy>().damageOntouch;
+        }
+        //todo add a powerup that increases amount of bullets
+        else if (collision.gameObject.CompareTag("Powerup"))
+        {
+            bulletCount += 1;
         }
     }
 }

@@ -155,3 +155,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   enemySpeed: 70
   enemyHealth: 20
+  damageOntouch: 20
