@@ -3,6 +3,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
+    [SerializeField] GameObject powerup;
+    
 
     GameObject player;
 
@@ -43,20 +45,22 @@ public class SpawnManager : MonoBehaviour
             initialEnemies += increaseEenemyCount;
             timeBetweenWaves += timeToAddBetweenWaves;
             SpawnEnemyWave(initialEnemies);
-           
+            SpawnPowerup();
+            SpawnPowerup();
+
         }
     }
     Vector3 GenerateSpawnPosition()
     {
         
         Vector3 randomPositiveZ = new Vector3 (Random.Range((player.transform.position.x - spawnDistanceX),(player.transform.position.x + spawnDistanceX)),
-            player.transform.position.y + spawnPointY, player.transform.position.z + spawnDistanceZ);
+            player.transform.position.y - spawnPointY, player.transform.position.z + spawnDistanceZ);
         Vector3 randomNegativeZ = new Vector3(Random.Range(player.transform.position.x - spawnDistanceX, player.transform.position.x + spawnDistanceX),
-            player.transform.position.y + spawnPointY, player.transform.position.z - spawnDistanceZ);
+            player.transform.position.y - spawnPointY, player.transform.position.z - spawnDistanceZ);
         Vector3 randomPositiveX = new Vector3(player.transform.position.x + spawnDistanceX,
-            player.transform.position.y + spawnPointY, Random.Range(player.transform.position.z - spawnDistanceZ, player.transform.position.z + spawnDistanceZ));
+            player.transform.position.y - spawnPointY, Random.Range(player.transform.position.z - spawnDistanceZ, player.transform.position.z + spawnDistanceZ));
         Vector3 randomNegativeX = new Vector3(player.transform.position.x - spawnDistanceX,
-           player.transform.position.y + spawnPointY, Random.Range(player.transform.position.z - spawnDistanceZ, player.transform.position.z + spawnDistanceZ));
+           player.transform.position.y - spawnPointY, Random.Range(player.transform.position.z - spawnDistanceZ, player.transform.position.z + spawnDistanceZ));
 
         Vector3[] spawnposition = {randomPositiveZ,randomNegativeZ,randomPositiveX,randomNegativeX};
         int randomSpawn = Random.Range(0, spawnposition.Length);
@@ -71,5 +75,9 @@ public class SpawnManager : MonoBehaviour
             int whichEnemy = Random.Range(0, enemies.Length);
             Instantiate(enemies[whichEnemy], GenerateSpawnPosition(), enemies[whichEnemy].transform.rotation);
         }
+    }
+    void SpawnPowerup()
+    {
+        Instantiate(powerup,GenerateSpawnPosition(), powerup.transform.rotation);
     }
 }

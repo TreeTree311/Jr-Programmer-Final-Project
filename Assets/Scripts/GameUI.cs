@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] InputAction openPauseMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject returnToGame;
+    [SerializeField] GameObject gameOver;
     [SerializeField] TextMeshProUGUI timerText;
 
     public float currentTime;
@@ -63,6 +64,7 @@ public class GameUI : MonoBehaviour
         GameManager.Instance.PauseGame();
         pauseMenu.SetActive(true);
         returnToGame.SetActive(false);
+        gameOver.SetActive(true);
         
     }
 }

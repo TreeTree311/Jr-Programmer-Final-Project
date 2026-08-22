@@ -101,10 +101,14 @@ public class PlayerController : MonoBehaviour
             healthBar.SethHealth(currentHealth);
             CheckForGameOver();
         }
-        //todo add a powerup that increases amount of bullets
-        else if (collision.gameObject.CompareTag("Powerup"))
+       
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+         if (other.CompareTag("Powerup"))
         {
             bulletCount += 1;
+            Destroy(other.gameObject);
         }
     }
     private void OnCollisionStay(Collision collision)
