@@ -10,13 +10,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] GameObject projectile;
 
-    [SerializeField] float playerHealth = 50;
+    [SerializeField] float currentHealth;
+    [SerializeField] float maxHealth = 100;
+    [SerializeField] HealthBar healthBar;
+
+    float damageCoolDown = 1f;
+    float damageCoolDownTimer = 0;
+
+
 
 
     [SerializeField] InputAction moveAction;
     InputSystem_Actions inputActions;
 
     Rigidbody rb;
+    [SerializeField] GameUI gameUI;
     Vector2 moveValue;
     Vector2 lookValue;
     public Vector3 lookDirection;
@@ -28,10 +36,14 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SethHealth(maxHealth);
         moveAction.Enable();
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
         rb = GetComponent<Rigidbody>();
+        
         StartCoroutine(ConstantFiring());
     }
 
@@ -85,12 +97,37 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            playerHealth -= collision.gameObject.GetComponent<Enemy>().damageOntouch;
+            currentHealth -= collision.gameObject.GetComponent<Enemy>().damageOntouch;
+            healthBar.SethHealth(currentHealth);
+            CheckForGameOver();
         }
         //todo add a powerup that increases amount of bullets
         else if (collision.gameObject.CompareTag("Powerup"))
         {
             bulletCount += 1;
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        damageCoolDownTimer += Time.deltaTime;
+
+        if (collision.gameObject.CompareTag("Enemy") & damageCoolDown <= damageCoolDownTimer)
+        {
+            currentHealth -= collision.gameObject.GetComponent<Enemy>().damageOntouch;
+            healthBar.SethHealth(currentHealth);
+            CheckForGameOver();
+            damageCoolDownTimer = 0;
+        }
+        
+        
+    }
+
+
+    void CheckForGameOver()
+    {
+        if (currentHealth <= 0)
+        {
+            gameUI.GameOver();
         }
     }
 }

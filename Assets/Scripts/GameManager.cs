@@ -33,10 +33,10 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-        else
-        {
-            Time.timeScale = 1f;   
-        }
-       
+        
+    }
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1f;  
     }
 }
