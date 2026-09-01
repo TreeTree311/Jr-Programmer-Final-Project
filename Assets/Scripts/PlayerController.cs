@@ -50,23 +50,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MovePlayer(); 
-        
-       
+        MovePlayer(); // ABSTRACTION
+
+
     }
     private void Update()
     {
 
         
     }
-    void MovePlayer()
+    void MovePlayer() // ABSTRACTION
     { 
         moveValue = moveAction.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(moveValue.x, 0, moveValue.y);
         rb.AddForce(moveDirection*playerSpeed);
 
     }
-    void fireProjectile()
+    void fireProjectile() // ABSTRACTION
     {
         int incrementRotationBy = 360 / bulletCount;
         int rotation = 0;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         { 
-            fireProjectile();
+            fireProjectile(); // ABSTRACTION
             yield return new WaitForSeconds(fireRate);
         }
     }

@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     float timeToAddBetweenWaves = 10f;
     float startTime;
     float elapsedTime;
+    int powerupsToSpawn = 2;
 
 
     
@@ -29,8 +30,8 @@ public class SpawnManager : MonoBehaviour
     {
         
         player = GameObject.Find("Player");
-        SpawnEnemyWave(initialEnemies);
-        
+        SpawnEnemyWave(initialEnemies); // ABSTRACTION
+
         startTime = Time.time;
         
 
@@ -44,13 +45,12 @@ public class SpawnManager : MonoBehaviour
         {
             initialEnemies += increaseEenemyCount;
             timeBetweenWaves += timeToAddBetweenWaves;
-            SpawnEnemyWave(initialEnemies);
-            SpawnPowerup();
-            SpawnPowerup();
+            SpawnEnemyWave(initialEnemies); // ABSTRACTION
+            SpawnPowerup(powerupsToSpawn); // ABSTRACTION
 
         }
     }
-    Vector3 GenerateSpawnPosition()
+    Vector3 GenerateSpawnPosition() // ABSTRACTION
     {
         
         Vector3 randomPositiveZ = new Vector3 (Random.Range((player.transform.position.x - spawnDistanceX),(player.transform.position.x + spawnDistanceX)),
@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    void SpawnEnemyWave(int enemiesToSpawn)
+    void SpawnEnemyWave(int enemiesToSpawn) // ABSTRACTION
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -76,8 +76,11 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemies[whichEnemy], GenerateSpawnPosition(), enemies[whichEnemy].transform.rotation);
         }
     }
-    void SpawnPowerup()
+    void SpawnPowerup(int numberOfPowerups) // ABSTRACTION
     {
-        Instantiate(powerup,GenerateSpawnPosition(), powerup.transform.rotation);
+        for (int i = 0; i < numberOfPowerups; i++)
+        {
+            Instantiate(powerup, GenerateSpawnPosition(), powerup.transform.rotation);
+        }
     }
 }
