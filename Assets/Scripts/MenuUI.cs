@@ -9,5 +9,8 @@ public class MenuUI : MonoBehaviour
     {
         GameManager.Instance.StartGame();
     }
-
+    public void Exit()
+    {
+        GameManager.Instance.ExitGame();
+    }
 }
