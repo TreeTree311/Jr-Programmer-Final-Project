@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4042901348350350567}
   - component: {fileID: 6115937629648468608}
   - component: {fileID: 4176962427005603591}
-  - component: {fileID: 3495314201420465429}
+  - component: {fileID: 6469205183300180806}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -141,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3495314201420465429
+--- !u!114 &6469205183300180806
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4698182234691147417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424fbbd79cae9154794d5c6575a6eb41, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b000ffc28775534bbe92caf22c42896, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  enemySpeed: 70
-  enemyHealth: 20
-  damageOntouch: 20
+  m_EditorClassIdentifier: Assembly-CSharp::AcidEnemy
+  enemySpeed: 80
+  enemyHealth: 10
+  damageOntouch: 5
+  enemyrb: {fileID: 0}
+  player: {fileID: 0}
+  acidBall: {fileID: 3673113006223493786, guid: 57c179e5815f1874381e07119b4a2432, type: 3}

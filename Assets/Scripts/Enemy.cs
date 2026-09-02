@@ -6,28 +6,28 @@ public class Enemy : MonoBehaviour
     [SerializeField] float enemyHealth;
     public float damageOntouch;
 
-    Rigidbody enemyrb;
-    GameObject player;
+    public Rigidbody enemyrb;
+    public GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         enemyrb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         FollowPlayer();
 
     }
-     void FollowPlayer()
+     public virtual void FollowPlayer()
     {
         Vector3 lookDirecion = (player.transform.position - transform.position).normalized;
         enemyrb.AddForce(lookDirecion*enemySpeed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public  void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player Projectile"))
         {

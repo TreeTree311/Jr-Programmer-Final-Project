@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
     float damageCoolDownTimer = 0;
 
 
-
-
     [SerializeField] InputAction moveAction;
     InputSystem_Actions inputActions;
 
@@ -33,7 +31,6 @@ public class PlayerController : MonoBehaviour
     int bulletCount = 1;
     float bulletLifeSpan = 0.8f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
@@ -47,18 +44,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ConstantFiring());
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         MovePlayer(); // ABSTRACTION
 
-
     }
-    private void Update()
-    {
-
-        
-    }
+  
     void MovePlayer() // ABSTRACTION
     { 
         moveValue = moveAction.ReadValue<Vector2>();
@@ -73,8 +64,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < bulletCount; i++)
         {
-            
-
+      
             GameObject bullet = Instantiate(projectile, transform.position, Quaternion.Euler(0, rotation, 0));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.AddForce(bulletRb.transform.forward * projectileSpeed, ForceMode.Impulse);
@@ -108,6 +98,13 @@ public class PlayerController : MonoBehaviour
          if (other.CompareTag("Powerup"))
         {
             bulletCount += 1;
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Enemy Projectile"))
+        {
+            currentHealth -= other.GetComponent<MoveProjectile>().damage;
+            healthBar.SethHealth(currentHealth);
+            CheckForGameOver();
             Destroy(other.gameObject);
         }
     }
