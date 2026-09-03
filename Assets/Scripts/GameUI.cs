@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public class GameUI : MonoBehaviour
 {
 
-    [SerializeField] InputAction openPauseMenu;
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject returnToGame;
-    [SerializeField] GameObject gameOver;
-    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] InputAction openPauseMenu; // ENCAPSULATION
+    [SerializeField] GameObject pauseMenu; // ENCAPSULATION
+    [SerializeField] GameObject returnToGame; // ENCAPSULATION
+    [SerializeField] GameObject gameOver; // ENCAPSULATION
+    [SerializeField] TextMeshProUGUI timerText; // ENCAPSULATION
 
     public float currentTime;
     
@@ -48,8 +48,7 @@ public class GameUI : MonoBehaviour
     public void Restart()
     {
         GameManager.Instance.StartGame();
-        //GameManager.Instance.PauseGame();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
 
     }
 

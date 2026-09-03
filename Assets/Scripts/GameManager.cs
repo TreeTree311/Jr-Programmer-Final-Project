@@ -7,8 +7,8 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-    
+    public static GameManager Instance { get; private set; } // ENCAPSULATION
+
     private void Awake()
     {
         if (Instance != null)

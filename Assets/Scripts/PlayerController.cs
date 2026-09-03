@@ -7,22 +7,22 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float playerSpeed;
-    [SerializeField] GameObject projectile;
+    [SerializeField] float playerSpeed; // ENCAPSULATION
+    [SerializeField] GameObject projectile; // ENCAPSULATION
 
-    [SerializeField] float currentHealth;
-    [SerializeField] float maxHealth = 100;
-    [SerializeField] HealthBar healthBar;
+    [SerializeField] float currentHealth; // ENCAPSULATION
+    [SerializeField] float maxHealth = 100; // ENCAPSULATION
+    [SerializeField] HealthBar healthBar; // ENCAPSULATION
 
     float damageCoolDown = 1f;
     float damageCoolDownTimer = 0;
 
 
-    [SerializeField] InputAction moveAction;
+    [SerializeField] InputAction moveAction; // ENCAPSULATION
     InputSystem_Actions inputActions;
 
     Rigidbody rb;
-    [SerializeField] GameUI gameUI;
+    [SerializeField] GameUI gameUI; // ENCAPSULATION
     Vector2 moveValue;
     Vector2 lookValue;
     public Vector3 lookDirection;
@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     float fireRate = 1f;
     int bulletCount = 1;
     float bulletLifeSpan = 0.8f;
+
+    float offSet = 0.5f;
 
     void Start()
     {
@@ -64,8 +66,8 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < bulletCount; i++)
         {
-      
-            GameObject bullet = Instantiate(projectile, transform.position, Quaternion.Euler(0, rotation, 0));
+            //Vector3 location = transform.position - (0, offSet, 0);
+            GameObject bullet = Instantiate(projectile, (new Vector3 (transform.position.x, offSet, transform.position.z)), Quaternion.Euler(0, rotation, 0));
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.AddForce(bulletRb.transform.forward * projectileSpeed, ForceMode.Impulse);
 

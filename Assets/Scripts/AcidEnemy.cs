@@ -22,14 +22,14 @@ public class AcidEnemy : Enemy  // INHERITANCE
         else
         {
             hasStopped = true;
-            SpitAcid();
+            SpitAcid(); // ABSTRACTION
         }
         if (hasStopped & distance > resumeFollowDistance)
         {
             hasStopped = false;
         }
     }
-    void SpitAcid()
+    void SpitAcid() // ABSTRACTION
     {
         if (hasStopped & Time.time > fireTime)
         {

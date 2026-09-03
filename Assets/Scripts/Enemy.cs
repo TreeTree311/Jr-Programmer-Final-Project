@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float enemySpeed;
-    [SerializeField] float enemyHealth;
+    [SerializeField] float enemySpeed; // ENCAPSULATION
+    [SerializeField] float enemyHealth; // ENCAPSULATION
     public float damageOntouch;
 
     public Rigidbody enemyrb;
